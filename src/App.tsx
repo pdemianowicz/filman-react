@@ -1,9 +1,20 @@
+import { Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
+import TvSeriesPage from "./pages/TvSeriesPage";
+import NotFoundPage from "./pages/NotFoundPage";
+
 function App() {
   return (
-    <div className="min-h-screen bg-background text-text-primary">
-      <h1 className="text-3xl font-bold">Hello world!</h1>
-      <p className="mt-4 font-medium text-lg text-text-secondary">Welcome to my react app!</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="movies" element={<MoviesPage />} />
+        <Route path="tv-series" element={<TvSeriesPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }
 
