@@ -38,7 +38,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-16">
-      <ContentSection title="Trending This Week" items={trending} />
+      <ContentSection title="Trending Now" items={trending} />
       <ContentSection title="Popular Movies" items={popularMovies} />
       <ContentSection title="Popular TV Shows" items={popularTV} />
       <ContentSection title="Upcoming Movies" items={upcoming} />
