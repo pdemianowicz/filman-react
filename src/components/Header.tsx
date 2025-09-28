@@ -5,6 +5,7 @@ import Logo from "../assets/svg/logo.svg?react";
 import HomeIcon from "../assets/svg/icon-nav-home.svg?react";
 import MoviesIcon from "../assets/svg/icon-nav-movies.svg?react";
 import TvSeriesIcon from "../assets/svg/icon-nav-tv-series.svg?react";
+import BookmarkIcon from "../assets/svg/icon-nav-bookmark.svg?react";
 
 interface NavLinkItem {
   path: string;
@@ -16,16 +17,17 @@ const navLinks: NavLinkItem[] = [
   { path: "/", label: "Home", icon: HomeIcon },
   { path: "/movies", label: "Movies", icon: MoviesIcon },
   { path: "/tv-series", label: "TV Series", icon: TvSeriesIcon },
+  { path: "/bookmark", label: "Bookmark", icon: BookmarkIcon },
 ];
 
 export default function Header() {
   return (
-    <header className="bg-surface p-4 md:py-8 flex items-center justify-between md:flex-col md:w-24 md:max-h-screen md:rounded-xl">
+    <header className="bg-surface p-4 md:py-8 flex items-center justify-between md:justify-start md:sticky md:top-8 md:flex-col md:w-24 md:h-[calc(100vh_-_4rem)] md:rounded-xl">
       <Link to="/" aria-label="Go to Home">
         <Logo className="h-6 md:h-8" />
       </Link>
 
-      <nav className="flex gap-4 md:flex-col md:my-auto">
+      <nav className="flex items-center gap-4 md:flex-col md:mt-16">
         {navLinks.map((link) => {
           const Icon = link.icon;
 
@@ -43,7 +45,7 @@ export default function Header() {
         })}
       </nav>
 
-      <img src={userAvatar} alt="User Avatar" className="h-8 rounded-full" />
+      <img src={userAvatar} alt="User Avatar" className="h-8 rounded-full md:mt-auto" />
     </header>
   );
 }
