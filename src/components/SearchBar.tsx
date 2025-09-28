@@ -79,7 +79,7 @@ export default function SearchBar() {
   console.log(results);
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <div className="flex items-center mb-4">
         <SerchIcon className="w-6 h-6 md:w-8 md:h-8 text-text-primary" />
         <div className="flex-1">
