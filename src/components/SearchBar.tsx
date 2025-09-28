@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SerchIcon from "../assets/svg/icon-search.svg?react";
 import { tmdbFetch, getImageUrl } from "../api/tmdb";
 import useDebounce from "../hooks/useDebounce";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface SearchResult {
   id: number;
@@ -21,6 +21,7 @@ export default function SearchBar() {
   const [error, setError] = useState("");
 
   const debounceSearch = useDebounce(query, 800);
+  const navigate = useNavigate();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -76,7 +77,12 @@ export default function SearchBar() {
     setError("");
   };
 
-  console.log(results);
+  const handleResultClick = (item: any) => () => {
+    const type = item.media_type;
+    navigate(`/${type}/${item.id}`); // ✅ Powinno być OK
+    setIsOpen(false);
+    setQuery("");
+  };
 
   return (
     <div className="relative z-10">
@@ -117,7 +123,7 @@ export default function SearchBar() {
       {isOpen && results.length > 0 && (
         <div className="absolute top-full left-0 right-0 bg-surface rounded-md shadow-lg max-h-80 overflow-y-auto">
           {results.map((item) => (
-            <div key={item.id} className="flex items-center gap-4 px-4 py-2 hover:bg-accent/20 cursor-pointer">
+            <div key={item.id} onClick={handleResultClick(item)} className="flex items-center gap-4 px-4 py-2 hover:bg-accent/20 cursor-pointer">
               <img
                 src={getImageUrl(item.poster_path || item.profile_path, "w92")}
                 alt={item.title || item.name}
