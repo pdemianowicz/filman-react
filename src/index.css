@@ -7,3 +7,7 @@
   --color-text-primary: #e7e5e4;
   --color-text-secondary: #a3a3a3;
 }
+
+body {
+  font-family: "Outfit", sans-serif;
+}
