@@ -30,3 +30,9 @@ export async function tmdbFetch(endpoint: string, options: FetchOptions = {}) {
 export function getImageUrl(path: string | undefined, size: string = "w500") {
   return `${IMAGE_BASE_URL}/${size}${path}`;
 }
+
+export async function getMovieDetails(id: number) {
+  return tmdbFetch(`/movie/${id}`, {
+    append_to_response: "credits,videos,images,similar,recommendations",
+  });
+}
