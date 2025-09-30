@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails, tmdbFetch } from "../api/tmdb";
+import { getMovieDetails, getPersonDetails, getTvDetails } from "../api/tmdb";
 
 interface MovieDetails {
   title: string;
@@ -25,16 +25,18 @@ interface MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  name?: string;
+  profile_path?: string;
 }
 
-export default function useMediaDetails() {
-  const { mediaType, id } = useParams<{ mediaType: string; id: string }>();
+export default function useMediaDetails(mediaType: "movie" | "tv" | "person") {
+  const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<MovieDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!mediaType || !id) return;
+    if (!id) return;
 
     const fetchMediaDetails = async () => {
       try {
@@ -42,9 +44,9 @@ export default function useMediaDetails() {
         if (mediaType === "movie") {
           data = await getMovieDetails(Number(id));
         } else if (mediaType === "tv") {
-          // data = await getTvDetails(Number(id));
+          data = await getTvDetails(Number(id));
         } else if (mediaType === "person") {
-          // data = await getPersonDetails(Number(id));
+          data = await getPersonDetails(Number(id));
         }
         setData(data);
       } catch (err) {

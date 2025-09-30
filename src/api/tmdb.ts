@@ -36,3 +36,15 @@ export async function getMovieDetails(id: number) {
     append_to_response: "credits,videos,images,similar,recommendations",
   });
 }
+
+export async function getTvDetails(id: number) {
+  return tmdbFetch(`/tv/${id}`, {
+    append_to_response: "credits,videos,images,similar,recommendations",
+  });
+}
+
+export async function getPersonDetails(id: number) {
+  return tmdbFetch(`/person/${id}`, {
+    append_to_response: "movie_credits,tv_credits,images",
+  });
+}

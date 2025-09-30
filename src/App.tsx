@@ -16,7 +16,7 @@ function App() {
         <Route path="movies" element={<MoviesPage />} />
         <Route path="tv-series" element={<TvSeriesPage />} />
 
-        <Route path="/:mediaType/:id" element={<MovieDetailsPage />} />
+        <Route path="movie/:id" element={<MovieDetailsPage />} />
         <Route path="tv/:id" element={<TvDetailsPage />} />
         <Route path="person/:id" element={<PersonDetailsPage />} />
 

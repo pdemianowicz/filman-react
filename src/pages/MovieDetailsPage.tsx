@@ -2,7 +2,7 @@ import useMediaDetails from "../hooks/useMediaDetails";
 import { getImageUrl } from "../api/tmdb";
 
 export default function MovieDetailsPage() {
-  const { data, loading, error } = useMediaDetails();
+  const { data, loading, error } = useMediaDetails("movie");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
