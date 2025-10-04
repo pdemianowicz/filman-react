@@ -2,50 +2,48 @@ import { Link, NavLink } from "react-router-dom";
 
 import userAvatar from "../assets/img/user.png";
 import Logo from "../assets/svg/logo.svg?react";
-import HomeIcon from "../assets/svg/icon-nav-home.svg?react";
-import MoviesIcon from "../assets/svg/icon-nav-movies.svg?react";
-import TvSeriesIcon from "../assets/svg/icon-nav-tv-series.svg?react";
-import BookmarkIcon from "../assets/svg/icon-nav-bookmark.svg?react";
 
 interface NavLinkItem {
   path: string;
   label: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 const navLinks: NavLinkItem[] = [
-  { path: "/", label: "Home", icon: HomeIcon },
-  { path: "/movies", label: "Movies", icon: MoviesIcon },
-  { path: "/tv-series", label: "TV Series", icon: TvSeriesIcon },
-  { path: "/bookmark", label: "Bookmark", icon: BookmarkIcon },
+  { path: "/", label: "Home" },
+  { path: "/movies", label: "Movies" },
+  { path: "/tv-series", label: "TV Series" },
+  { path: "/bookmark", label: "Bookmark" },
 ];
 
 export default function Header() {
   return (
-    <header className="bg-surface p-4 md:py-8 flex items-center justify-between md:justify-start md:sticky md:top-8 md:flex-col md:w-24 md:h-[calc(100vh_-_4rem)] md:rounded-xl">
-      <Link to="/" aria-label="Go to Home">
-        <Logo className="h-6 md:h-8" />
-      </Link>
+    <header className="bg-surface h-16 md:h-20">
+      <div className="flex items-center justify-between max-w-7xl mx-auto p-4 md:p-6 h-full">
+        <Link to="/" aria-label="Go to Home" className="flex items-center gap-4">
+          <Logo />
+          <span className="text-xl font-medium mr-8 lg:mr-16">Filman</span>
+        </Link>
 
-      <nav className="flex items-center gap-4 md:flex-col md:mt-16">
-        {navLinks.map((link) => {
-          const Icon = link.icon;
+        <nav className="hidden md:flex items-center space-x-4 flex-grow text-gray-300">
+          {navLinks.map((link) => {
+            return (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-700 transition-colors ${
+                    isActive ? "text-text-primary bg-gray-900" : "text-text-secondary hover:text-text-primary"
+                  }`
+                }
+                aria-label={link.label}>
+                {link.label}
+              </NavLink>
+            );
+          })}
+        </nav>
 
-          return (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              className={({ isActive }) =>
-                `p-2 rounded-lg transition-colors ${isActive ? "text-text-primary" : "text-text-secondary hover:text-accent"}`
-              }
-              aria-label={link.label}>
-              <Icon className="h-5 w-5 md:h-6 md:w-6" />
-            </NavLink>
-          );
-        })}
-      </nav>
-
-      <img src={userAvatar} alt="User Avatar" className="h-8 rounded-full md:mt-auto" />
+        <img src={userAvatar} alt="User Avatar" className="h-8 rounded-full md:mt-auto" />
+      </div>
     </header>
   );
 }
